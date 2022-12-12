@@ -34,13 +34,15 @@ void motorSet ( unsigned char channel,
 void operatorControl() {
   int power;
   int turn;
+  int strafe;
     while (1) {
-        power = joystickGetAnalog(1, 2); // vertical axis on left joystick
+        strafe = joystickGetAnalog(2, 1)
+        power = joystickGetAnalog(2, 2); // vertical axis on left joystick
         turn  = joystickGetAnalog(1, 1); // horizontal axis on left joystick
-		motorSet(5, power + turn);
-		motorSet(6, power + turn);
-		motorSet(7, power * -1 + turn * -1) ;
-		motorSet(8, power * -1 + turn * -1);
+		motorSet(5, power - strafe + turn);//fr
+		motorSet(6, power + strafe + turn);//fl
+		motorSet(7, (power * -1) - strafe + (turn * -1)) ; //br
+		motorSet(8, (power * -1) + strafe + (turn * -1)); //bl
         delay(20);
     }
 }
