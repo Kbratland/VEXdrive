@@ -39,15 +39,15 @@ void operatorControl() {
   int roter;
   int pitch;
     while (1) {
-        claw = buttons(6);
-        strafe = joystickGetAnalog(2, 1);
-        power = joystickGetAnalog(2, 2); // vertical axis on left joystick
-        turn  = joystickGetAnalog(1, 1); // horizontal axis on left joystick
+        //claw = buttons(6);
+        strafe = joystickGetAnalog(1, 4);
+        power = joystickGetAnalog(1, 3); // vertical axis on left joystick
+        turn  = joystickGetAnalog(1, 1) * -1; // horizontal axis on left joystick
         
-		motorSet(5, power + strafe + turn);//fl
+		motorSet(5, (power*-1) + (strafe*-1) + turn);//fl
 		motorSet(6, power - strafe + turn);//fr
-		motorSet(7, (power * -1) - strafe + turn); //bl
-		motorSet(8, (power * -1) + strafe + turn); //br
+		motorSet(7, (power*-1) - strafe + turn); //bl
+		motorSet(8, power + (strafe*-1) + turn); //br
         delay(20);
     }
 }
