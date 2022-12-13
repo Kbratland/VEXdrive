@@ -26,6 +26,7 @@
  *
  * This task should never exit; it should end with some kind of infinite loop, even if empty.
  */
+int joystickGetDigital(unsigned char joystick, unsigned char axis);
 int joystickGetAnalog ( unsigned char joystick, 
 						unsigned char axis);
 void motorSet ( unsigned char channel,  
@@ -39,7 +40,7 @@ void operatorControl() {
   int roter;
   int pitch;
     while (1) {
-        claw = joystickGetDigital(1, 6, );
+        claw = joystickGetDigital(1, 6);
         strafe = joystickGetAnalog(1, 4);
         power = joystickGetAnalog(1, 3); // vertical axis on left joystick
         turn  = joystickGetAnalog(1, 1) * -1; // horizontal axis on left joystick
