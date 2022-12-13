@@ -39,8 +39,8 @@ void operatorControl() {
   int roter;
   int pitch
     while (1) {
-        claw = buttons(8,9)
-        strafe = joystickGetAnalog(2, 1)
+        claw = buttons(6);
+        strafe = joystickGetAnalog(2, 1);
         power = joystickGetAnalog(2, 2); // vertical axis on left joystick
         turn  = joystickGetAnalog(1, 1); // horizontal axis on left joystick
         
