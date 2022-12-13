@@ -46,8 +46,8 @@ void operatorControl() {
         
 		motorSet(5, (power*-1) + (strafe*-1) + turn);//fl
 		motorSet(6, power - strafe + turn);//fr
-		motorSet(7, (power*-1) - strafe + turn); //bl
-		motorSet(8, power + (strafe*-1) + turn); //br
+		motorSet(7, (power*-1) - (strafe*-1) + turn); //bl
+		motorSet(8, power + strafe + turn); //br
         delay(20);
     }
 }
