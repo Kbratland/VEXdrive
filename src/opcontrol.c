@@ -36,11 +36,11 @@ void operatorControl() {
   int power;
   int turn;
   int strafe;
-  int claw;
+  int belt;
   int roter;
   int pitch;
     while (1) {
-        claw = joystickGetDigital(1, 6);
+        belt = joystickGetDigital(1, 5);
         strafe = joystickGetAnalog(1, 4);
         power = joystickGetAnalog(1, 3); // vertical axis on left joystick
         turn  = joystickGetAnalog(1, 1) * -1; // horizontal axis on left joystick
@@ -49,7 +49,8 @@ void operatorControl() {
 		motorSet(6, power - strafe + turn);//fr
 		motorSet(7, (power*-1) - (strafe*-1) + turn); //bl
 		motorSet(8, power + strafe + turn); //br
-    moterSet(2, claw);
+    motorSet(2, belt*-1);
+    motorSet(3, belt);
         delay(20);
     }
 }
