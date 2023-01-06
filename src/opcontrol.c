@@ -26,12 +26,6 @@
  *
  * This task should never exit; it should end with some kind of infinite loop, even if empty.
  */
-int joystickGetDigital(unsigned char joystick, unsigned char axis);
-int joystickGetAnalog ( unsigned char joystick, 
-						unsigned char axis);
-void motorSet ( unsigned char channel,  
-                int speed         
-              );
 void operatorControl() {
   int power;
   int turn;
@@ -40,17 +34,25 @@ void operatorControl() {
   int roter;
   int pitch;
     while (1) {
-        belt = joystickGetDigital(1, 5);
+      bool up = joystickGetDigital(1, 5, JOY_UP);
+      bool down = joystickGetDigital(1, 5, JOY_DOWN);
+      if(up)
+      {
+        belt = 127;
+      }
+      else if(down)
+      {
+        belt = -100;
+      }
+      else
+      {
+        belt = 0;
+      }
         strafe = joystickGetAnalog(1, 4);
         power = joystickGetAnalog(1, 3); // vertical axis on left joystick
         turn  = joystickGetAnalog(1, 1) * -1; // horizontal axis on left joystick
-        
-		motorSet(5, (power*-1) + (strafe*-1) + turn);//fl
-		motorSet(6, power - strafe + turn);//fr
-		motorSet(7, (power*-1) - (strafe*-1) + turn); //bl
-		motorSet(8, power + strafe + turn); //br
-    motorSet(2, belt*-1);
-    motorSet(3, belt);
+    motorSet(8, belt*-1);
+    motorSet(9, belt);
         delay(20);
     }
 }
