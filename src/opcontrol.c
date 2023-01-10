@@ -29,13 +29,14 @@
 void operatorControl() {
   int power;
   int turn;
-  int strafe;
+  //int strafe;
   int belt;
   int roter;
   int pitch;
     while (1) {
       bool up = joystickGetDigital(1, 5, JOY_UP);
       bool down = joystickGetDigital(1, 5, JOY_DOWN);
+      bool drop = joystickGetDigital(1, 6, JOY_UP);
       if(up)
       {
         belt = 127;
@@ -48,11 +49,32 @@ void operatorControl() {
       {
         belt = 0;
       }
-        strafe = joystickGetAnalog(1, 4);
-        power = joystickGetAnalog(1, 3); // vertical axis on left joystick
-        turn  = joystickGetAnalog(1, 1) * -1; // horizontal axis on left joystick
+      if(drop)
+      {
+        roter = 127; 
+      }
+      else
+      {
+        roter = -127;
+      }
+        //strafe = joystickGetAnalog(1, 4);
+        const int deadbanda = 20;  //(you would want to calibrate this to the right value for your robot)
+        power = joystickGetAnalog(1, 3);
+        if (power < deadbanda && power > (deadbanda * -1)){
+        power = 0;
+        }// vertical axis on left joystick
+        const int deadbandb = 20;  //(you would want to calibrate this to the right value for your robot)
+        turn = joystickGetAnalog(1, 4);
+        if (turn < deadbandb && turn > (deadbandb * -1)){
+        turn = 0;
+        }// vertical axis on left joystick // horizontal axis on left joystick
+    motorSet(9, -power+turn);
+    motorSet(10, -power+turn);
+    motorSet(2, -power-turn);
+    motorSet(1, -power-turn);
+    motorSet(6, roter);
     motorSet(8, belt*-1);
-    motorSet(9, belt);
+    motorSet(7, belt);
         delay(20);
     }
 }
