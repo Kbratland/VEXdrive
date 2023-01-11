@@ -51,11 +51,11 @@ void operatorControl() {
       }
       if(drop)
       {
-        roter = 127; 
+        roter = 57; 
       }
       else
       {
-        roter = -127;
+        roter = 0;
       }
         //strafe = joystickGetAnalog(1, 4);
         const int deadbanda = 20;  //(you would want to calibrate this to the right value for your robot)
