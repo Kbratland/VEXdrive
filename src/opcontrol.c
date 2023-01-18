@@ -51,7 +51,7 @@ void operatorControl() {
       }
       if(drop)
       {
-        roter = 57; 
+        roter = 127; 
       }
       else
       {
@@ -68,10 +68,10 @@ void operatorControl() {
         if (turn < deadbandb && turn > (deadbandb * -1)){
         turn = 0;
         }// vertical axis on left joystick // horizontal axis on left joystick
-    motorSet(9, -power+turn);
-    motorSet(10, -power+turn);
-    motorSet(2, -power-turn);
-    motorSet(1, -power-turn);
+    motorSet(9, -power-turn);
+    motorSet(10, -power-turn);
+    motorSet(2, -power+turn);
+    motorSet(1, -power+turn);
     motorSet(6, roter);
     motorSet(8, belt*-1);
     motorSet(7, belt);
