@@ -8,6 +8,7 @@
  */
 
 #include "main.h"
+#include <math.h>
 
 /*
  * Runs the user operator control code. This function will be started in its own task with the
@@ -29,7 +30,8 @@
 void operatorControl() {
   int power;
   int turn;
-  //int strafe;
+  int speed;
+  int strafe;
   int belt;
   int roter;
   int pitch;
@@ -64,17 +66,23 @@ void operatorControl() {
         power = 0;
         }// vertical axis on left joystick
         const int deadbandb = 20;  //(you would want to calibrate this to the right value for your robot)
-        turn = joystickGetAnalog(1, 4);
+        turn = joystickGetAnalog(1, 1);
         if (turn < deadbandb && turn > (deadbandb * -1)){
         turn = 0;
         }// vertical axis on left joystick // horizontal axis on left joystick
-    motorSet(9, -power-turn);
-    motorSet(10, -power-turn);
-    motorSet(2, -power+turn);
-    motorSet(1, -power+turn);
-    motorSet(6, roter);
-    motorSet(8, belt*-1);
-    motorSet(7, belt);
+        const int deadbandc = 20;  //(you would want to calibrate this to the right value for your robot)
+        strafe = joystickGetAnalog(1, 4);
+        if (strafe < deadbandc && strafe > (deadbandc * -1)){
+        strafe = 0;
+        }
+        speed = abs(power) + abs(strafe);
+    //motorSet(9, -power-turn);
+    motorSet(10, turn);
+    //motorSet(2, -power+turn);
+    motorSet(1, speed);
+    //motorSet(6, roter);
+    //motorSet(8, belt*-1);
+    //wmotorSet(7, belt);
         delay(20);
     }
 }
